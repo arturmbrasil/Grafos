@@ -1,4 +1,4 @@
-package show_grafos;
+package grafos;
 
 public class Vertice {
 	String nome;

@@ -1,4 +1,4 @@
-package show_grafos;
+package grafos;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -76,11 +76,11 @@ public class Home extends JFrame {
 		contentPane.add(tela1, "tela1");
 		tela1.setLayout(null);
 
-		JLabel lblOGrafo = new JLabel("O grafo \u00E9 orientado ?");
+		JLabel lblOGrafo = new JLabel("O grafo é Orientado?");
 		lblOGrafo.setBounds(52, 111, 178, 20);
 		tela1.add(lblOGrafo);
 
-		orientadoN = new JRadioButton("N\u00E3o");
+		orientadoN = new JRadioButton("Não");
 		orientadoN.setSelected(true);
 		Grbt1.add(orientadoN);
 		orientadoN.setBounds(282, 107, 110, 29);
@@ -91,11 +91,11 @@ public class Home extends JFrame {
 		orientadoS.setBounds(444, 107, 103, 29);
 		tela1.add(orientadoS);
 
-		JLabel label = new JLabel("O grafo \u00E9 Valorado ?");
-		label.setBounds(52, 189, 178, 20);
-		tela1.add(label);
+		JLabel lblOGrafo_1 = new JLabel("O grafo é Valorado?");
+		lblOGrafo_1.setBounds(52, 189, 178, 20);
+		tela1.add(lblOGrafo_1);
 
-		valoradoN = new JRadioButton("N\u00E3o");
+		valoradoN = new JRadioButton("Não");
 		valoradoN.setSelected(true);
 		Grbt2.add(valoradoN);
 		valoradoN.setBounds(282, 185, 110, 29);
@@ -106,13 +106,13 @@ public class Home extends JFrame {
 		valoradoS.setBounds(444, 185, 103, 29);
 		tela1.add(valoradoS);
 
-		JLabel lblRepresentaoDe = new JLabel("------ Representa\u00E7\u00E3o de Grafos ------");
+		JLabel lblRepresentaoDe = new JLabel("------ Representação de Grafos ------");
 		lblRepresentaoDe.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRepresentaoDe.setBounds(15, 35, 572, 20);
 		tela1.add(lblRepresentaoDe);
 
-		JLabel lblQuantiaDeVrtices = new JLabel("Quantia de V\u00E9rtices (Conjunto V) :");
-		lblQuantiaDeVrtices.setBounds(88, 274, 245, 20);
+		JLabel lblQuantiaDeVrtices = new JLabel("Quantidade de Vértices (Conjunto V) :");
+		lblQuantiaDeVrtices.setBounds(88, 274, 254, 20);
 		tela1.add(lblQuantiaDeVrtices);
 
 		txtVertices = new JTextField();
@@ -120,7 +120,7 @@ public class Home extends JFrame {
 		tela1.add(txtVertices);
 		txtVertices.setColumns(10);
 
-		btnPrximo = new JButton("Pr\u00F3ximo");
+		btnPrximo = new JButton("Próximo");
 		btnPrximo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				valorado = valoradoS.isSelected();
@@ -139,11 +139,11 @@ public class Home extends JFrame {
 		contentPane.add(tela2, "tela2");
 		tela2.setLayout(null);
 
-		JLabel lblVrtice = new JLabel("V\u00E9rtice:   ");
+		JLabel lblVrtice = new JLabel("Vértice:   ");
 		lblVrtice.setBounds(56, 99, 69, 20);
 		tela2.add(lblVrtice);
 
-		JLabel lblDefinaAs = new JLabel("------ Defina as liga\u00E7\u00F5es dos v\u00E9rtices ------");
+		JLabel lblDefinaAs = new JLabel("------ Defina as ligações dos vértices ------");
 		lblDefinaAs.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDefinaAs.setBounds(33, 43, 554, 20);
 		tela2.add(lblDefinaAs);
@@ -152,15 +152,15 @@ public class Home extends JFrame {
 		cbV1.setBounds(175, 96, 106, 26);
 		tela2.add(cbV1);
 
-		JLabel label_1 = new JLabel("V\u00E9rtice:   ");
-		label_1.setBounds(331, 99, 69, 20);
-		tela2.add(label_1);
+		JLabel lblVrtice_1 = new JLabel("Vértice:   ");
+		lblVrtice_1.setBounds(331, 99, 69, 20);
+		tela2.add(lblVrtice_1);
 
 		cbV2 = new JComboBox<String>();
 		cbV2.setBounds(450, 96, 106, 26);
 		tela2.add(cbV2);
 
-		btnMostrar = new JButton("Mostrar todos as Representa\u00E7\u00F5es");
+		btnMostrar = new JButton("Mostrar todos as Representações");
 		btnMostrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				resposta += g.listaDeArestas(valorado);
@@ -172,7 +172,7 @@ public class Home extends JFrame {
 		btnMostrar.setBounds(33, 399, 554, 29);
 		tela2.add(btnMostrar);
 
-		JButton btnPrximaAresta = new JButton("Pr\u00F3xima Aresta");
+		JButton btnPrximaAresta = new JButton("Próxima Aresta");
 		btnPrximaAresta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int v1 = cbV1.getSelectedIndex();
@@ -232,7 +232,7 @@ public class Home extends JFrame {
 
 		
 		
-		JButton btnIncio = new JButton("In\u00EDcio");
+		JButton btnIncio = new JButton("Início");
 		btnIncio.setBounds(243, 355, 115, 29);
 		tela3.add(btnIncio);
 		setLocationRelativeTo(null);
