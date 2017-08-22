@@ -46,5 +46,22 @@ public class Grafo {
 	public Double pesoAresta(int n) {
 		return arestas.get(n).peso;
 	}
+	
+	public String listaDeArestas(boolean valorado){
+		String msg = "######## LISTA DE ARESTAS ########\n[ ";
+		
+		for (Aresta a : arestas){
+			msg += "[ " + a.v1.getNome() + "," + a.v2.getNome() ;
+			if (valorado){
+				msg += "," + a.getPeso();
+			}
+			msg += "],";
+		}
+		
+		msg = msg.substring(0, msg.length() - 1);
+		msg += " ]\n";
+		msg += "##################################\n";
+		return msg;
+	}
 
 }

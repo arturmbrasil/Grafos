@@ -12,7 +12,6 @@ import javax.swing.JEditorPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
@@ -38,10 +37,12 @@ public class Home extends JFrame {
 	private JComboBox<String> cbV2;
 	private JButton btnMostrar;
 	private JEditorPane edtDTWinfo;
+	private JEditorPane edtDTWinfo2;
 
 	public Grafo g = new Grafo();
 	boolean valorado, orientado;
 	String msg = "Arestas\n";
+	String resposta = "";
 
 	/**
 	 * Launch the application.
@@ -160,6 +161,14 @@ public class Home extends JFrame {
 		tela2.add(cbV2);
 
 		btnMostrar = new JButton("Mostrar todos as Representa\u00E7\u00F5es");
+		btnMostrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				resposta += g.listaDeArestas(valorado);
+				edtDTWinfo2.setText(resposta);
+				CardLayout card = (CardLayout) (contentPane.getLayout());
+				card.show(contentPane, "tela3");
+			}
+		});
 		btnMostrar.setBounds(33, 399, 554, 29);
 		tela2.add(btnMostrar);
 
@@ -208,11 +217,21 @@ public class Home extends JFrame {
 		contentPane.add(tela3, "tela3");
 		tela3.setLayout(null);
 
-		JTextPane textPane = new JTextPane();
-		textPane.setEditable(false);
-		textPane.setBounds(15, 16, 572, 277);
-		tela3.add(textPane);
+		//JTextPane textPane = new JTextPane();
+		//textPane.setEditable(false);
+		//textPane.setBounds(15, 16, 572, 277);
+		//tela3.add(textPane);
 
+		edtDTWinfo2 = new JEditorPane();
+		edtDTWinfo2.setEditable(false);
+		JScrollPane spEditor2 = new JScrollPane(edtDTWinfo2, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		spEditor2.setBounds(15, 16, 572, 277);
+		edtDTWinfo2.setText(resposta);
+		tela3.add(spEditor2);
+
+		
+		
 		JButton btnIncio = new JButton("In\u00EDcio");
 		btnIncio.setBounds(243, 355, 115, 29);
 		tela3.add(btnIncio);
