@@ -18,7 +18,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JSeparator;
 import javax.swing.JScrollPane;
 
-public class Home extends JFrame {
+public class TelaPrincipal extends JFrame {
 
 	/**
 	 * 
@@ -51,7 +51,7 @@ public class Home extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Home frame = new Home();
+					TelaPrincipal frame = new TelaPrincipal();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -63,7 +63,7 @@ public class Home extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Home() {
+	public TelaPrincipal() {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 634, 491);
@@ -164,6 +164,8 @@ public class Home extends JFrame {
 		btnMostrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				resposta += g.listaDeArestas(valorado);
+				resposta += g.matrizAdj(valorado, orientado);
+				
 				edtDTWinfo2.setText(resposta);
 				CardLayout card = (CardLayout) (contentPane.getLayout());
 				card.show(contentPane, "tela3");

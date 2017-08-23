@@ -63,5 +63,50 @@ public class Grafo {
 		msg += "##################################\n";
 		return msg;
 	}
+	
+	public String matrizAdj(boolean valorado, boolean orientado){
+		double[][] matriz;
+		String msg = "######## MATRIZ DE ADJACENCIA ########\n";
+		int tamanho = vertices.size();
+		matriz = new double[tamanho][tamanho];
+		
+		for(Aresta a : arestas){
+			int v1 = vertices.indexOf(a.getV1());
+			int v2 = vertices.indexOf(a.getV2());
+			
+			if(valorado & orientado){
+					matriz[v1][v2] = a.getPeso();				
+			}
+			else if(!valorado & orientado){
+				matriz[v1][v2] = 999;	
+			}
+			else if(valorado & !orientado){
+				matriz[v1][v2] = a.getPeso();
+				matriz[v2][v1] = a.getPeso();
+			}
+			else if(!valorado & !orientado){
+				matriz[v1][v2] = 999;
+				matriz[v2][v1] = 999;
+			}
+		}
+			
+		for (int i=0 ; i<matriz.length ; i++){
+			msg += vertices.get(i).getNome();
+				
+			for (int j=0 ; j<matriz.length ; j++){
+				if(valorado){
+					msg += " | " + matriz[i][j] + " ";
+				}else if(matriz[i][j] == 999){
+					msg += " | " + "1" + " ";					
+				}else{
+					msg += " | " + "0" + " ";					
+				}
+			}
+			msg += "\n";
+		}
+	
+		msg += "##################################\n";
+		return msg;
+	}
 
 }
