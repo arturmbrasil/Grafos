@@ -39,10 +39,11 @@ public class TelaPrincipal extends JFrame {
 	private JEditorPane edtDTWinfo;
 	private JEditorPane edtDTWinfo2;
 
-	public Grafo g = new Grafo();
+	public Grafo g;
 	boolean valorado, orientado;
 	String msg = "Arestas\n";
 	String resposta = "";
+	int cont = 0;
 
 	/**
 	 * Launch the application.
@@ -123,6 +124,7 @@ public class TelaPrincipal extends JFrame {
 		btnPrximo = new JButton("Próximo");
 		btnPrximo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//Define o valor das variaveis valorado e orientado
 				valorado = valoradoS.isSelected();
 				orientado = orientadoS.isSelected();
 
@@ -160,13 +162,16 @@ public class TelaPrincipal extends JFrame {
 		cbV2.setBounds(450, 96, 106, 26);
 		tela2.add(cbV2);
 
+		//Botão para mudar para a tela 3 e mostrar todas as representações do Grafo
 		btnMostrar = new JButton("Mostrar todos as Representações");
 		btnMostrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				resposta += g.listaDeArestas(valorado);
 				resposta += g.matrizAdj(valorado, orientado);
-				
+				resposta += g.listaAdj();
 				edtDTWinfo2.setText(resposta);
+				
 				CardLayout card = (CardLayout) (contentPane.getLayout());
 				card.show(contentPane, "tela3");
 			}
@@ -174,6 +179,7 @@ public class TelaPrincipal extends JFrame {
 		btnMostrar.setBounds(33, 399, 554, 29);
 		tela2.add(btnMostrar);
 
+		//Botão que grava a aresta no Grafo
 		JButton btnPrximaAresta = new JButton("Próxima Aresta");
 		btnPrximaAresta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -186,8 +192,15 @@ public class TelaPrincipal extends JFrame {
 
 				if (orientado) {
 					msg = msg + " ---> " + cbV2.getSelectedItem();
+					
+					//Adiciona Vertice 2 na lista de ajacencia do Vertice 1
+					g.vertices.get(v1).addListaAjd(g.vertices.get(v2));
 				} else {
 					msg = msg + " --- " + cbV2.getSelectedItem();
+					
+					//Adiciona Vertice 2 na lista de ajacencia do Vertice 1 e vice-versa
+					g.vertices.get(v1).addListaAjd(g.vertices.get(v2));
+					g.vertices.get(v2).addListaAjd(g.vertices.get(v1));
 				}
 
 				if (valorado) {
@@ -219,11 +232,6 @@ public class TelaPrincipal extends JFrame {
 		contentPane.add(tela3, "tela3");
 		tela3.setLayout(null);
 
-		//JTextPane textPane = new JTextPane();
-		//textPane.setEditable(false);
-		//textPane.setBounds(15, 16, 572, 277);
-		//tela3.add(textPane);
-
 		edtDTWinfo2 = new JEditorPane();
 		edtDTWinfo2.setEditable(false);
 		JScrollPane spEditor2 = new JScrollPane(edtDTWinfo2, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
@@ -232,21 +240,20 @@ public class TelaPrincipal extends JFrame {
 		edtDTWinfo2.setText(resposta);
 		tela3.add(spEditor2);
 
-		
-		
 		JButton btnIncio = new JButton("Início");
 		btnIncio.setBounds(243, 355, 115, 29);
 		tela3.add(btnIncio);
 		setLocationRelativeTo(null);
 	}
 
+	//Cria um grafo com N vertices
 	public void criaGrafo() {
-
 		int nVertices = Integer.parseInt(txtVertices.getText());
+		g = new Grafo();
 		g.addVertices(nVertices);
-
 	}
 
+	//Preenche combobox com todos os nomes de todos os vertices
 	public void colocaComboBox() {
 		for (int i = 0; i < g.vertices.size(); i++) {
 			cbV1.addItem(g.vertices.get(i).nome);
