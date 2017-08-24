@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.CardLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JEditorPane;
@@ -170,6 +171,8 @@ public class TelaPrincipal extends JFrame {
 				resposta += g.listaDeArestas(valorado);
 				resposta += g.matrizAdj(valorado, orientado);
 				resposta += g.listaAdj();
+				resposta += g.matrizIncidencia(orientado);
+				
 				edtDTWinfo2.setText(resposta);
 				
 				CardLayout card = (CardLayout) (contentPane.getLayout());
@@ -241,6 +244,19 @@ public class TelaPrincipal extends JFrame {
 		tela3.add(spEditor2);
 
 		JButton btnIncio = new JButton("Início");
+		btnIncio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				edtDTWinfo.setText("Arestas");
+				resposta = "";
+				msg = "Arestas\n";
+				txtVertices.setText(null);
+				orientadoN.setSelected(true);
+				valoradoN.setSelected(true);
+				CardLayout card = (CardLayout) (contentPane.getLayout());
+				card.show(contentPane, "tela1");
+				
+			}
+		});
 		btnIncio.setBounds(243, 355, 115, 29);
 		tela3.add(btnIncio);
 		setLocationRelativeTo(null);
@@ -248,13 +264,23 @@ public class TelaPrincipal extends JFrame {
 
 	//Cria um grafo com N vertices
 	public void criaGrafo() {
-		int nVertices = Integer.parseInt(txtVertices.getText());
+		int nVertices;
+		try {
+			nVertices = Integer.parseInt(txtVertices.getText());			
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Teste novamente, valor invalido");
+			e.printStackTrace();
+			return;
+		}
 		g = new Grafo();
 		g.addVertices(nVertices);
 	}
 
 	//Preenche combobox com todos os nomes de todos os vertices
 	public void colocaComboBox() {
+		cbV1.removeAllItems();
+		cbV2.removeAllItems();
+		
 		for (int i = 0; i < g.vertices.size(); i++) {
 			cbV1.addItem(g.vertices.get(i).nome);
 			cbV2.addItem(g.vertices.get(i).nome);
