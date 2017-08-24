@@ -168,18 +168,20 @@ public class TelaPrincipal extends JFrame {
 		btnMostrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				resposta = "";
+				
 				resposta += g.listaDeArestas(valorado);
 				resposta += g.matrizAdj(valorado, orientado);
 				resposta += g.listaAdj();
 				resposta += g.matrizIncidencia(orientado);
 				
 				edtDTWinfo2.setText(resposta);
-				
+				edtDTWinfo2.setCaretPosition(0); //Volta a barra de rolagem para o topo
 				CardLayout card = (CardLayout) (contentPane.getLayout());
 				card.show(contentPane, "tela3");
 			}
 		});
-		btnMostrar.setBounds(33, 399, 554, 29);
+		btnMostrar.setBounds(33, 383, 554, 29);
 		tela2.add(btnMostrar);
 
 		//Botão que grava a aresta no Grafo
@@ -230,6 +232,15 @@ public class TelaPrincipal extends JFrame {
 		spEditor.setBounds(33, 216, 554, 130);
 		edtDTWinfo.setText(msg);
 		tela2.add(spEditor);
+		
+		JButton btnVoltar1 = new JButton("Voltar");
+		btnVoltar1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limpaTudo();
+			}
+		});
+		btnVoltar1.setBounds(246, 412, 117, 29);
+		tela2.add(btnVoltar1);
 
 		JPanel tela3 = new JPanel();
 		contentPane.add(tela3, "tela3");
@@ -239,26 +250,30 @@ public class TelaPrincipal extends JFrame {
 		edtDTWinfo2.setEditable(false);
 		JScrollPane spEditor2 = new JScrollPane(edtDTWinfo2, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		spEditor2.setBounds(15, 16, 572, 277);
+		spEditor2.setBounds(15, 16, 572, 350);
 		edtDTWinfo2.setText(resposta);
 		tela3.add(spEditor2);
 
 		JButton btnIncio = new JButton("Início");
 		btnIncio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				edtDTWinfo.setText("Arestas");
-				resposta = "";
-				msg = "Arestas\n";
-				txtVertices.setText(null);
-				orientadoN.setSelected(true);
-				valoradoN.setSelected(true);
+				limpaTudo();
+			}
+		});
+		btnIncio.setBounds(396, 404, 115, 29);
+		tela3.add(btnIncio);
+		
+		JButton btnVoltar2 = new JButton("Voltar");
+		btnVoltar2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
 				CardLayout card = (CardLayout) (contentPane.getLayout());
-				card.show(contentPane, "tela1");
+				card.show(contentPane, "tela2");
 				
 			}
 		});
-		btnIncio.setBounds(243, 355, 115, 29);
-		tela3.add(btnIncio);
+		btnVoltar2.setBounds(6, 390, 117, 29);
+		tela3.add(btnVoltar2);
 		setLocationRelativeTo(null);
 	}
 
@@ -285,5 +300,17 @@ public class TelaPrincipal extends JFrame {
 			cbV1.addItem(g.vertices.get(i).nome);
 			cbV2.addItem(g.vertices.get(i).nome);
 		}
+	}
+	
+	//Limpa tudo e volta para a tela 1
+	public void limpaTudo(){
+		edtDTWinfo.setText("Arestas");
+		resposta = "";
+		msg = "Arestas\n";
+		txtVertices.setText(null);
+		orientadoN.setSelected(true);
+		valoradoN.setSelected(true);
+		CardLayout card = (CardLayout) (contentPane.getLayout());
+		card.show(contentPane, "tela1");
 	}
 }
