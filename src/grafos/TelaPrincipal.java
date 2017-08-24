@@ -260,7 +260,7 @@ public class TelaPrincipal extends JFrame {
 				limpaTudo();
 			}
 		});
-		btnIncio.setBounds(396, 404, 115, 29);
+		btnIncio.setBounds(394, 404, 115, 29);
 		tela3.add(btnIncio);
 		
 		JButton btnVoltar2 = new JButton("Voltar");
@@ -272,7 +272,7 @@ public class TelaPrincipal extends JFrame {
 				
 			}
 		});
-		btnVoltar2.setBounds(6, 390, 117, 29);
+		btnVoltar2.setBounds(94, 404, 117, 29);
 		tela3.add(btnVoltar2);
 		setLocationRelativeTo(null);
 	}
