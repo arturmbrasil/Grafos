@@ -181,7 +181,7 @@ public class TelaPrincipal extends JFrame {
 				card.show(contentPane, "tela3");
 			}
 		});
-		btnMostrar.setBounds(33, 383, 554, 29);
+		btnMostrar.setBounds(33, 412, 296, 29);
 		tela2.add(btnMostrar);
 
 		//Botão que grava a aresta no Grafo
@@ -239,8 +239,43 @@ public class TelaPrincipal extends JFrame {
 				limpaTudo();
 			}
 		});
-		btnVoltar1.setBounds(246, 412, 117, 29);
+		btnVoltar1.setBounds(470, 412, 117, 29);
 		tela2.add(btnVoltar1);
+		
+		//Executa algoritmo de Dijkstra
+		JButton btnDijkstra = new JButton("Dijkstra");
+		btnDijkstra.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String dijkstra;
+				
+				if(valorado){
+					String ori = JOptionPane.showInputDialog("Vertice de origem?");
+					Boolean achou = false;
+					//Verifica se o vértice de origem existe, se existir executa o algoritmo
+					for(Vertice v : g.vertices){
+						if(v.getNome().equalsIgnoreCase(ori)){
+							dijkstra = g.Dijkstra(v, orientado);
+							CardLayout card = (CardLayout) (contentPane.getLayout());
+							card.show(contentPane, "tela3");
+							achou = true;
+							
+							edtDTWinfo2.setText(dijkstra);
+						}
+					}
+					if(achou == false)
+						JOptionPane.showMessageDialog(null, "O vertice de origem não existe, tente novamente.");					
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "O grafo deve ser valorado.");
+				}
+				
+				
+			
+			}
+		});
+		btnDijkstra.setBounds(341, 412, 117, 29);
+		tela2.add(btnDijkstra);
 
 		JPanel tela3 = new JPanel();
 		contentPane.add(tela3, "tela3");
