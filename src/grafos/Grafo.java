@@ -139,7 +139,7 @@ public class Grafo {
 	// MATRIZ DE INCIDENCIA
 	public String matrizIncidencia(boolean orientado){
 		int[][] matriz;
-		String msg = "############ MATRIZ DE INCIDENCIA ############\n\nVertices: ";
+		String msg = "############ MATRIZ DE INCIDENCIA ############\n\n";
 		int n = vertices.size();
 		int m = arestas.size();
 		//Cria a matriz |n| X |m|
