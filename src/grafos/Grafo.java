@@ -1,6 +1,7 @@
 package grafos;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.JOptionPane;
 
@@ -193,7 +194,7 @@ public class Grafo {
 	}
 		
 	//Dijkstra
-	public String Dijkstra(Vertice origem, Boolean orientado){
+	public String dijkstra(Vertice origem, Boolean orientado){
 		String msg = "########## Dijkstra ##########\n\nVertices        : ";
 		//Inicialização
 		Boolean[] perm = new Boolean[vertices.size()];
@@ -295,7 +296,39 @@ public class Grafo {
 		
 	}
 	
+	
+	//Kruskal
+	public String kruskal(){
+		String msg = "########## Kruskal ##########\n\nArestas do subgrafo:\n";
 
+		//Ordena as arestas em ordem crescente
+		Collections.sort(arestas);
+		
+	
+		ArrayList<Aresta> arvoreKruskal = new ArrayList<Aresta>();
+		
+	    DisjointSet d = new DisjointSet(vertices);
+
+		for(Aresta a : arestas){
+			Vertice v1 = a.getV1();
+			Vertice v2 = a.getV2();
+			if (d.find(v1.getNo()) != d.find(v2.getNo())) {
+				arvoreKruskal.add(a);
+				d.union(v1.getNo(), v2.getNo());
+		      }
+		}
+			
+		
+		//Monta a mensagem
+		Double custoTotal = 0.0;
+		for(Aresta a : arvoreKruskal){
+			msg+= "Nome aresta: " + a.getNome() + " - Vertices: " + a.getV1().getNome()+ " - " + a.getV2().getNome() + " - Peso: " + a.getPeso() + "\n";
+			custoTotal += a.getPeso();
+		}
+
+		return msg + "Custo total: " + custoTotal;
+	}
+	
 	public ArrayList<Vertice> getVertices() {
 		return vertices;
 	}
@@ -312,6 +345,80 @@ public class Grafo {
 		this.arestas = arestas;
 	}
 	
+	public class Node {
+		int rank;
+		int index;
+		Node parent;
+		
+		public Node(int r, int i, Node p) {
+			this.rank = r;
+			this.index = i;
+		    this.parent = p;
+		}
+	}
 	
+	class DisjointSet {
+		private int nodeCount = 0;
+		private int setCount = 0;
+
+		ArrayList<Node> rootNodes;
+
+		public int find(Node n) {
+			Node current = n;
+		    while (current.parent != null)
+		    current = current.parent;
+
+		    Node root = current;
+
+		    current = n;
+		    while (current != root) {
+		    		Node temp = current.parent;
+		    		current.parent = root;
+		    		current = temp;
+		    	}
+
+		    return root.index;
+		  }
+
+		  public void union(Node i, Node j) {
+			  int indexI = find(i);
+			  int indexJ = find(j);
+
+			  if (indexI == indexJ) return;
+
+			  Node a = this.rootNodes.get(indexI);
+			  Node b = this.rootNodes.get(indexJ);
+
+			  if (a.rank < b.rank) {
+				  a.parent = b;
+			  } else if (a.rank > b.rank) {
+				  b.parent = a;
+			  } else {
+				  b.parent = a;
+				  a.rank++;
+			  }
+		    
+			  this.setCount--;
+		  }
+
+		  public void makeSets(ArrayList<Vertice> vertices) {
+			  for (Vertice v : vertices)
+				  makeSet(v);
+		  }
+
+		  public void makeSet(Vertice vertice) {
+			  Node n = new Node(0, rootNodes.size(), null);
+			  vertice.setNo(n);
+			  this.rootNodes.add(n);
+			  this.setCount++;
+			  this.nodeCount++;
+		  }
+
+
+		  public DisjointSet(ArrayList<Vertice> vertices) {
+			  this.rootNodes = new ArrayList<Node>(vertices.size());
+			  makeSets(vertices);
+		  }
+		}
 
 }

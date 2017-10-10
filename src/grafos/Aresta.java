@@ -1,6 +1,6 @@
 package grafos;
 
-public class Aresta {
+public class Aresta implements Comparable<Aresta>{
 	String nome;
 	Vertice v1, v2;
 	Double peso;
@@ -59,6 +59,17 @@ public class Aresta {
 	public String toString() {
 		return "Aresta [nome=" + nome + ", v1=" + v1 + ", v2=" + v2 + ", peso=" + peso + ", valorado=" + valorado
 				+ ", orientado=" + orientado + "]";
+	}
+
+	@Override
+	public int compareTo(Aresta o) {
+		if (this.peso < o.peso) {
+            return -1;
+        }
+        if (this.peso > o.peso) {
+            return 1;
+        }
+        return 0;
 	}
 
 }

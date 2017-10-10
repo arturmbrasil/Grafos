@@ -181,7 +181,7 @@ public class TelaPrincipal extends JFrame {
 				card.show(contentPane, "tela3");
 			}
 		});
-		btnMostrar.setBounds(33, 412, 296, 29);
+		btnMostrar.setBounds(160, 371, 296, 29);
 		tela2.add(btnMostrar);
 
 		//Botão que grava a aresta no Grafo
@@ -222,7 +222,7 @@ public class TelaPrincipal extends JFrame {
 		tela2.add(btnPrximaAresta);
 
 		JSeparator separator = new JSeparator();
-		separator.setBounds(15, 373, 572, 14);
+		separator.setBounds(15, 358, 572, 14);
 		tela2.add(separator);
 
 		edtDTWinfo = new JEditorPane();
@@ -255,7 +255,7 @@ public class TelaPrincipal extends JFrame {
 					//Verifica se o vértice de origem existe, se existir executa o algoritmo
 					for(Vertice v : g.vertices){
 						if(v.getNome().equalsIgnoreCase(ori)){
-							dijkstra = g.Dijkstra(v, orientado);
+							dijkstra = g.dijkstra(v, orientado);
 							CardLayout card = (CardLayout) (contentPane.getLayout());
 							card.show(contentPane, "tela3");
 							achou = true;
@@ -274,8 +274,33 @@ public class TelaPrincipal extends JFrame {
 			
 			}
 		});
-		btnDijkstra.setBounds(341, 412, 117, 29);
+		btnDijkstra.setBounds(33, 412, 117, 29);
 		tela2.add(btnDijkstra);
+		
+		JButton btnKruskal = new JButton("Kruskal");
+		btnKruskal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String kruskal;
+				
+				if(valorado && !orientado){
+						kruskal = g.kruskal();
+						CardLayout card = (CardLayout) (contentPane.getLayout());
+						card.show(contentPane, "tela3");
+							
+						edtDTWinfo2.setText(kruskal);		
+				}else{
+					JOptionPane.showMessageDialog(null, "O grafo deve ser valorado e não orientado.");
+				}
+
+			}
+		});
+		btnKruskal.setBounds(175, 412, 117, 29);
+		tela2.add(btnKruskal);
+		
+		JButton btnPrim = new JButton("Prim-Jarnik");
+		btnPrim.setBounds(331, 412, 117, 29);
+		tela2.add(btnPrim);
 
 		JPanel tela3 = new JPanel();
 		contentPane.add(tela3, "tela3");

@@ -2,10 +2,22 @@ package grafos;
 
 import java.util.ArrayList;
 
+import grafos.Grafo.Node;
+
 public class Vertice {
 	String nome;
 	ArrayList<Vertice> listaAdj = new ArrayList<Vertice>();
+	Node no;
 	
+	
+	public Node getNo() {
+		return no;
+	}
+
+	public void setNo(Node no) {
+		this.no = no;
+	}
+
 	//Retorna uma string com a Lista de Adjancencia do Vertice
 	public String mostraListaAdj(){
 		String msg = "[";
